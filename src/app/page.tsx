@@ -85,7 +85,7 @@ const defaultPatients: Patient[] = [
 ];
 
 export default function Home() {
-  const [patients, setPatients] = useState<Patient[]>(defaultPatients);
+ const [patients, setPatients] = useState<Patient[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -98,7 +98,7 @@ export default function Home() {
   const fetchPatients = async () => {
     const res = await fetch("/api/patients");
     const data = await res.json();
-    setPatients([...defaultPatients, ...data]);
+    setPatients(data);
   };
 
   /* 🔍 Search logic */

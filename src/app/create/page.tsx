@@ -16,7 +16,7 @@ export default function CreatePatient() {
         patientId: "",
         policyNumber: "",
         insuranceCompany: "",
-        treatmentCategory: [],
+        treatmentCategory: "",
         treatmentDate: "",
         hospital: "",
         physician: "",
@@ -47,14 +47,7 @@ export default function CreatePatient() {
             }
         }
 
-        // ✅ SPECIAL FIX FOR treatmentCategory
-        if (name === "treatmentCategory") {
-            setFormData((prev) => ({
-                ...prev,
-                treatmentCategory: [value], // convert string → array
-            }));
-            return;
-        }
+
 
         setFormData((prev) => ({
             ...prev,
@@ -100,7 +93,7 @@ export default function CreatePatient() {
                     patientId: "",
                     policyNumber: "",
                     insuranceCompany: "",
-                    treatmentCategory: [],
+                    treatmentCategory: "",
                     treatmentDate: "",
                     hospital: "",
                     physician: "",
@@ -222,7 +215,8 @@ export default function CreatePatient() {
                                     id="treatmentCategory"
                                     name="treatmentCategory"
 
-                                    value={formData.treatmentCategory[0] || ""}
+                                 value={formData.treatmentCategory}
+
                                     onChange={handleChange}
                                     required
                                 >

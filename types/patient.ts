@@ -4,7 +4,7 @@ export interface Patient {
   patientId: string;
   policyNumber: string;
   insuranceCompany: string;
-  treatmentCategory:string[];
+  treatmentCategory:string;
   treatmentDate: string;
   hospital: string;
   physician: string;
