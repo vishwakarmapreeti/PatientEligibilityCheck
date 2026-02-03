@@ -20,74 +20,83 @@ interface Patient {
   eligibilityStatus: string;
 }
 
+const botRules = {
+  PAT001: "eligible",
+  PAT002: "not-eligible",
+  PAT003: "not-eligible",
+  PAT004: "eligible",
+  PAT005: "not-eligible",
+};
 
-const defaultPatients: Patient[] = [
-  {
-    patientName: "Rahul Sharma",
-    dob: "1988-05-14",
-    patientId: "PAT001",
-    policyNumber: "SUK12345",
-    insuranceCompany: "Sukoon",
-    treatmentCategory: ["Cardiology"],
-    hospital: "Apollo Hospital Mumbai",
-    treatmentDate: "2025-01-10",
-    status: "Scheduled",
-    eligibilityStatus: "Pending",
-  },
-  {
-    patientName: "Priya Mehta",
-    dob: "1992-09-22",
-    patientId: "PAT002",
-    policyNumber: "SUK67890",
-    insuranceCompany: "Tokkio",
-    treatmentCategory: ["Dental"],
-    hospital: "Fortis Hospital Mulund",
-    treatmentDate: "2025-02-15",
-    status: "Scheduled",
-    eligibilityStatus: "Pending",
-  },
-  {
-    patientName: "Amit Patel",
-    dob: "1979-03-18",
-    patientId: "PAT003",
-    policyNumber: "SUK12345",
-    insuranceCompany: "Sukoon",
-    treatmentCategory: ["Orthopedic"],
-    hospital: "Nanavati Max Hospital",
-    treatmentDate: "2025-01-28",
-    status: "Scheduled",
-    eligibilityStatus: "Pending",
-  },
-  {
-    patientName: "Neha Reddy",
-    dob: "1995-11-05",
-    patientId: "PAT004",
-    policyNumber: "SUK67890",
-    insuranceCompany: "Tokkio",
-    treatmentCategory: ["Neurology"],
-    hospital: "Kokilaben Ambani Hospital",
-    treatmentDate: "2025-03-02",
-    status: "Scheduled",
-    eligibilityStatus: "Pending",
-  },
-  {
-    patientName: "Vikram Singh",
-    dob: "1983-07-30",
-    patientId: "PAT005",
-    policyNumber: "SUK12345",
-    insuranceCompany: "Sukoon",
-    treatmentCategory: ["Surgery"],
-    hospital: "Lilavati Hospital Bandra",
-    treatmentDate: "2025-02-05",
-    status: "Scheduled",
-    eligibilityStatus: "Pending",
-  },
-];
+
+// const defaultPatients: Patient[] = [
+//   {
+//     patientName: "Rahul Sharma",
+//     dob: "1988-05-14",
+//     patientId: "PAT001",
+//     policyNumber: "SUK12345",
+//     insuranceCompany: "Sukoon",
+//     treatmentCategory: ["Cardiology"],
+//     hospital: "Apollo Hospital Mumbai",
+//     treatmentDate: "2025-01-10",
+//     status: "Scheduled",
+//     eligibilityStatus: "Pending",
+//   },
+//   {
+//     patientName: "Priya Mehta",
+//     dob: "1992-09-22",
+//     patientId: "PAT002",
+//     policyNumber: "SUK67890",
+//     insuranceCompany: "Tokkio",
+//     treatmentCategory: ["Dental"],
+//     hospital: "Fortis Hospital Mulund",
+//     treatmentDate: "2025-02-15",
+//     status: "Scheduled",
+//     eligibilityStatus: "Pending",
+//   },
+//   {
+//     patientName: "Amit Patel",
+//     dob: "1979-03-18",
+//     patientId: "PAT003",
+//     policyNumber: "SUK12345",
+//     insuranceCompany: "Sukoon",
+//     treatmentCategory: ["Orthopedic"],
+//     hospital: "Nanavati Max Hospital",
+//     treatmentDate: "2025-01-28",
+//     status: "Scheduled",
+//     eligibilityStatus: "Pending",
+//   },
+//   {
+//     patientName: "Neha Reddy",
+//     dob: "1995-11-05",
+//     patientId: "PAT004",
+//     policyNumber: "SUK67890",
+//     insuranceCompany: "Tokkio",
+//     treatmentCategory: ["Neurology"],
+//     hospital: "Kokilaben Ambani Hospital",
+//     treatmentDate: "2025-03-02",
+//     status: "Scheduled",
+//     eligibilityStatus: "Pending",
+//   },
+//   {
+//     patientName: "Vikram Singh",
+//     dob: "1983-07-30",
+//     patientId: "PAT005",
+//     policyNumber: "SUK12345",
+//     insuranceCompany: "Sukoon",
+//     treatmentCategory: ["Surgery"],
+//     hospital: "Lilavati Hospital Bandra",
+//     treatmentDate: "2025-02-05",
+//     status: "Scheduled",
+//     eligibilityStatus: "Pending",
+//   },
+// ];
 
 export default function Home() {
- const [patients, setPatients] = useState<Patient[]>([]);
+  const [patients, setPatients] = useState<Patient[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+const [isBotRunning, setIsBotRunning] = useState(false);
 
   const itemsPerPage = 10;
 
@@ -101,7 +110,7 @@ export default function Home() {
     setPatients(data);
   };
 
-  /* 🔍 Search logic */
+  /* Search logic */
   const filteredPatients = patients.filter((patient) =>
     Object.values(patient).some((value) => {
       if (Array.isArray(value)) {
@@ -117,8 +126,7 @@ export default function Home() {
     })
   );
 
-
-  /* 📄 Pagination logic */
+  /* Pagination logic */
   const totalPages = Math.ceil(filteredPatients.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -127,14 +135,55 @@ export default function Home() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+//   const handleRunBot = async () => {
+//     // Call a nymcetion
+//  try {
+//   setIsBotRunning(true)
+//   await fetch("/api/patients/run-bot",{
+//     method:"POST"
+//   })
+//    await fetchPatients();
+
+//  } catch (error) {
+//   console.error("Bot error",error)
+//  }finally{
+//   setIsBotRunning(false)
+//  }
+//   };
+
+ const handleRunBot = async () => {
+  setIsBotRunning(true);
+
+  const updatedPatients = patients.map((patient) => {
+    // check if bot has a rule for this patient
+    if (botRules[patient.patientId]) {
+      return {
+        ...patient,
+        eligibilityStatus: botRules[patient.patientId],
+      };
+    }
+
+    // if no rule, keep patient unchanged
+    return patient;
+  });
+
+  // small delay just for UX
+  await new Promise((resolve) => setTimeout(resolve, 800));
+
+  setPatients(updatedPatients);
+  setIsBotRunning(false);
+};
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <div className="home-container">
         <div className="top-section">
           <h1>Hospital Patient Management</h1>
+          <button onClick={handleRunBot} disabled={isBotRunning} className="run-bot-btn" name="run-bot">
+             {isBotRunning ? "Bot is running..." : "Run Bot"}
+          </button>
 
           <Link href="/create">
             <button className="create-btn">Create Patient</button>

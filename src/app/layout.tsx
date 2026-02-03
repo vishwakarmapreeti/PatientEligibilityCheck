@@ -1,5 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './globals.css';
+import './layout.css';
+
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import { ReactNode } from 'react';
 
 export const metadata = {
@@ -14,7 +18,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className="layoutWrapper">
+          <Navbar />
+          <main className="mainContent">{children}</main>
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }

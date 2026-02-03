@@ -1,5 +1,6 @@
 .navbar {
-  background: #3d2c8d;
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
   padding: 15px 40px;
   color: white;
 }

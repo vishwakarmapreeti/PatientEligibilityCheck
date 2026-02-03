@@ -1,5 +1,5 @@
 .home-container {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
   padding: 2rem;
 }
@@ -42,6 +42,8 @@
 .create-btn:active {
   transform: translateY(0);
 }
+
+
 
 .search-section {
   margin-bottom: 1.5rem;
@@ -275,6 +277,56 @@ tbody td {
   font-size: 0.875rem;
   border-top: 1px solid #e2e8f0;
   background-color: #f7fafc;
+}
+
+
+.run-bot-btn {
+   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  color: white;
+  border: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.3);
+}
+
+.run-bot-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 178, 172, 0.4);
+}
+
+.run-bot-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* 🔹 Disabled State */
+.run-bot-btn:disabled {
+  background: #cbd5e0;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.8;
+}
+
+/* 🔹 Optional Smooth Pulse While Running */
+.run-bot-btn:disabled {
+  animation: pulse 1.5s infinite;
+}
+
+
+@keyframes pulse {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.8;
+  }
 }
 
 @media (max-width: 768px) {

@@ -111,7 +111,7 @@ export default function CreatePatient() {
 
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="patient-form-wrapper">
                 <div className="patient-form-container">
                     <div className="form-card-header">
